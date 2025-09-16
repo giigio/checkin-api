@@ -2,6 +2,9 @@ import { CheckIn } from 'generated/prisma'
 import { CheckInsRepository } from '@/repositories/check-ins-repository'
 import { GymsRepository } from '@/repositories/gyms-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coordinates'
+import { MaxDistanceError } from './errors/max-distance-error'
+import { UserAlreadyCheckInError } from './errors/user-already-check-in'
 
 interface CheckInServiceRequest {
   userId: string
@@ -23,6 +26,8 @@ export class CheckInService {
   async execute({
     userId,
     gymId,
+    userLatitude,
+    userLongitude,
   }: CheckInServiceRequest): Promise<CheckInServiceResponse> {
     const gym = await this.gymsRepository.findById(gymId)
 
@@ -31,17 +36,27 @@ export class CheckInService {
     }
 
     // calculate distance between user and gym
-    // if (distance > 0.1) {
-    //   throw new Error('User is too far from the gym.')
-    // }
+    const distance = getDistanceBetweenCoordinates(
+      { latitude: userLatitude, longitude: userLongitude },
+      {
+        latitude: gym.latitude.toNumber(),
+        longitude: gym.longitude.toNumber(),
+      },
+    )
 
+    const MAX_DISTANCE_IN_KILOMETERS = 0.1 // 100 meters
+    if (distance > MAX_DISTANCE_IN_KILOMETERS) {
+      throw new MaxDistanceError()
+    }
+
+    // check if user has already checked in today
     const checkInOnSameDate = await this.checkInsRepository.findByUserIdOnDate(
       userId,
       new Date(),
     )
 
     if (checkInOnSameDate) {
-      throw new Error('User has already checked in today.')
+      throw new UserAlreadyCheckInError()
     }
 
     const checkIn = await this.checkInsRepository.create({

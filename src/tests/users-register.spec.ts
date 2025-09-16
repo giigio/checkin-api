@@ -7,7 +7,7 @@ import { expect, describe, it } from 'vitest'
 let inMemoryUsersRepository: InMemoryUsersRepository
 let sut: UsersRegister
 
-describe('Register Use Case', () => {
+describe('Users Register Use Case', () => {
   it('should be able to register', async () => {
     inMemoryUsersRepository = new InMemoryUsersRepository()
     sut = new UsersRegister(inMemoryUsersRepository)
