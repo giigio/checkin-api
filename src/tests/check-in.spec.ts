@@ -1,14 +1,17 @@
 import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-ins-repository'
-import { CheckInService } from '@/services/checkin'
+import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
+import { CheckInService } from '@/services/check-in'
 import { expect, describe, it, beforeEach, vi, afterEach } from 'vitest'
 
 let inMemoryCheckInsRepository: InMemoryCheckInsRepository
+let inMemoryGymsRepository: InMemoryGymsRepository
 let sut: CheckInService
 
 describe('Check-in Use Case', () => {
   beforeEach(() => {
     inMemoryCheckInsRepository = new InMemoryCheckInsRepository()
-    sut = new CheckInService(inMemoryCheckInsRepository)
+    inMemoryGymsRepository = new InMemoryGymsRepository()
+    sut = new CheckInService(inMemoryCheckInsRepository, inMemoryGymsRepository)
 
     vi.useFakeTimers()
   })
@@ -21,6 +24,8 @@ describe('Check-in Use Case', () => {
     const { checkIn } = await sut.execute({
       gymId: 'gym-01',
       userId: 'user-01',
+      userLatitude: 0,
+      userLongitude: 0,
     })
     expect(checkIn.id).toEqual(expect.any(String))
   })
@@ -30,12 +35,16 @@ describe('Check-in Use Case', () => {
     await sut.execute({
       gymId: 'gym-01',
       userId: 'user-01',
+      userLatitude: 0,
+      userLongitude: 0,
     })
 
     await expect(() =>
       sut.execute({
         gymId: 'gym-01',
         userId: 'user-01',
+        userLatitude: 0,
+        userLongitude: 0,
       }),
     ).rejects.toBeInstanceOf(Error)
   })
@@ -45,12 +54,16 @@ describe('Check-in Use Case', () => {
     await sut.execute({
       gymId: 'gym-01',
       userId: 'user-01',
+      userLatitude: 0,
+      userLongitude: 0,
     })
 
     vi.setSystemTime(new Date(2024, 0, 21, 8, 0, 0))
     const { checkIn } = await sut.execute({
       gymId: 'gym-01',
       userId: 'user-01',
+      userLatitude: 0,
+      userLongitude: 0,
     })
     expect(checkIn.id).toEqual(expect.any(String))
   })

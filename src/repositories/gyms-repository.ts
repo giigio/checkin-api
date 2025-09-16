@@ -1,7 +1,5 @@
-import { Prisma, User } from 'generated/prisma'
+import { Gym } from 'generated/prisma'
 
 export interface GymsRepository {
-  findById(id: string): Promise<User | null>
-  findByEmail(email: string): Promise<User | null>
-  create(data: Prisma.UserCreateInput): Promise<User>
+  findById(id: string): Promise<Gym | null>
 }
