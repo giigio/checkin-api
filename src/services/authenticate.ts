@@ -1,4 +1,4 @@
-import { UsersRepositoryParams } from '@/repositories/users-repository'
+import { UsersRepository } from '@/repositories/users-repository'
 import { InvalidCredentialsError } from './errors/invalid-credentials-error'
 import { compare } from 'bcryptjs'
 import { User } from 'generated/prisma'
@@ -13,7 +13,7 @@ interface AuthenticateServiceResponse {
 }
 
 export class AuthenticateService {
-  constructor(private usersRepository: UsersRepositoryParams) {}
+  constructor(private usersRepository: UsersRepository) {}
   async execute({
     email,
     password,
