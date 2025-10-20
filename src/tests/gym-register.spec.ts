@@ -1,14 +1,14 @@
 import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
-import { GymsRegister } from '@/services/gyms-register'
+import { CreateGymRegister } from '@/services/gyms-register'
 import { expect, describe, it } from 'vitest'
 
 let inMemoryGymsRepository: InMemoryGymsRepository
-let sut: GymsRegister
+let sut: CreateGymRegister
 
 describe('Gyms Register Use Case', () => {
   it('should be able to register new gym', async () => {
     inMemoryGymsRepository = new InMemoryGymsRepository()
-    sut = new GymsRegister(inMemoryGymsRepository)
+    sut = new CreateGymRegister(inMemoryGymsRepository)
 
     const { gym } = await sut.execute({
       title: 'Test Gym',

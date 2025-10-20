@@ -10,7 +10,7 @@ interface fetchNearbyGymsResponse {
   gyms: Gym[]
 }
 
-export class FetchNearbyGymsRegister {
+export class FetchNearbyCreateGymRegister {
   constructor(private fetchNearbyGymsRepository: GymsRepository) {}
 
   async execute({

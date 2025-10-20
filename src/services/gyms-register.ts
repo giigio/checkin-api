@@ -14,7 +14,7 @@ interface registerGymResponse {
   gym: Gym
 }
 
-export class GymsRegister {
+export class CreateGymRegister {
   constructor(private gymsRepository: GymsRepository) {}
 
   async execute({

@@ -1,14 +1,14 @@
 import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
-import { SearchGymsRegister } from '@/services/search-gyms'
+import { SearchCreateGymRegister } from '@/services/search-gyms'
 import { expect, describe, it, beforeEach } from 'vitest'
 
 let inMemoryGymsRepository: InMemoryGymsRepository
-let sut: SearchGymsRegister
+let sut: SearchCreateGymRegister
 
 describe('Fetch User Check-in History Use Case', () => {
   beforeEach(() => {
     inMemoryGymsRepository = new InMemoryGymsRepository()
-    sut = new SearchGymsRegister(inMemoryGymsRepository)
+    sut = new SearchCreateGymRegister(inMemoryGymsRepository)
   })
 
   it('should be able to fetch gym search', async () => {
