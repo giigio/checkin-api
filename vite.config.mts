@@ -32,4 +32,12 @@ export default defineConfig({
       ],
     },
   }
+  ,
+  // Instruct the Vite file watcher to ignore generated/prisma and node_modules so
+  // Prisma's temp file operations don't trigger test runner reloads on Windows.
+  server: {
+    watch: {
+      ignored: ['**/generated/**', '**/prisma/**', '**/node_modules/**'],
+    },
+  },
 })
