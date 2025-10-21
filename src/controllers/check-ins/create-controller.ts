@@ -20,7 +20,7 @@ export async function createCheckInController(
   })
 
   const { gymId } = checkInParamsSchema.parse(request.params)
-  const { latitude, longitude } = bodySchema.parse(request.query)
+  const { latitude, longitude } = bodySchema.parse(request.body)
 
   const checkInsRegister = makeCheckInUseCase()
 

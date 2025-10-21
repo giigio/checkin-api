@@ -7,11 +7,11 @@ export async function nearbyGymController(
   reply: FastifyReply,
 ) {
   const querySchema = z.object({
-    latitude: z.number().refine((val) => Math.abs(val) <= 90, {
-      message: 'Latitude must be between -90 and 90',
+    latitude: z.coerce.number().refine((val) => {
+      return Math.abs(val) <= 90
     }),
-    longitude: z.number().refine((val) => Math.abs(val) <= 180, {
-      message: 'Longitude must be between -180 and 180',
+    longitude: z.coerce.number().refine((val) => {
+      return Math.abs(val) <= 180
     }),
   })
 
@@ -19,10 +19,10 @@ export async function nearbyGymController(
 
   const gymsFetch = makeFetchNearbyGymsUseCase()
 
-  await gymsFetch.execute({
+  const { gyms } = await gymsFetch.execute({
     userLatitude: latitude,
     userLongitude: longitude,
   })
 
-  return reply.status(201).send()
+  return reply.status(200).send({ gyms })
 }

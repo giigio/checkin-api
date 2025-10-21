@@ -10,11 +10,11 @@ export async function createGymController(
     title: z.string(),
     description: z.string().nullable(),
     phone: z.string().nullable(),
-    latitude: z.number().refine((val) => Math.abs(val) <= 90, {
-      message: 'Latitude must be between -90 and 90',
+    latitude: z.number().refine((val) => {
+      return Math.abs(val) <= 90
     }),
-    longitude: z.number().refine((val) => Math.abs(val) <= 180, {
-      message: 'Longitude must be between -180 and 180',
+    longitude: z.number().refine((val) => {
+      return Math.abs(val) <= 180
     }),
   })
 
