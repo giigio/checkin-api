@@ -1,10 +1,8 @@
 import { FastifyInstance } from 'fastify'
-import { usersRoutes } from './users-routes'
-import { sessionsRoutes } from './sessions-routes'
-import { profileRoutes } from './profile-routes'
+import { usersRoutes } from './users/routes'
+import { gymsRoutes } from './gyms/routes'
 
 export default async function registerRoutes(app: FastifyInstance) {
-  app.register(usersRoutes, { prefix: '/users' })
-  app.register(sessionsRoutes, { prefix: '/sessions' })
-  app.register(profileRoutes, { prefix: '/profile' })
+  app.register(usersRoutes)
+  app.register(gymsRoutes)
 }
