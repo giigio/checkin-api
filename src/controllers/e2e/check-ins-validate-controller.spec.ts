@@ -14,7 +14,7 @@ describe('Check-In Validation E2E Controller', () => {
   })
 
   it('should be able to validate check-in', async () => {
-    const { token } = await createAndAuthUser(app)
+    const { token } = await createAndAuthUser(app, true)
     const user = await prisma.user.findFirstOrThrow()
 
     const gym = await prisma.gym.create({
