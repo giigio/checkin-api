@@ -1,0 +1,331 @@
+{
+  "name": "API Checkin",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "Profile",
+      "filename": "Profile",
+      "seq": 3,
+      "root": {
+        "request": {
+          "auth": {
+            "mode": "inherit"
+          },
+          "vars": {
+            "req": [
+              {
+                "name": "RESOURCE",
+                "value": "profile",
+                "enabled": true,
+                "local": false,
+                "uid": "Y8MOuwOZvmCY3aYfgxvVb"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Profile",
+          "seq": 3
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "GET",
+          "filename": "GET.bru",
+          "seq": 2,
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0
+          },
+          "tags": [],
+          "request": {
+            "url": "{{BASE_URL}}/{{RESOURCE}}",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer {{session_token}}",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Gym",
+      "filename": "Gym",
+      "seq": 4,
+      "root": {
+        "request": {
+          "auth": {
+            "mode": "inherit"
+          },
+          "vars": {
+            "req": [
+              {
+                "name": "RESOURCE",
+                "value": "gyms",
+                "enabled": true,
+                "local": false,
+                "uid": "6zU6OvLrx1qF5dhZRLW9m"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Gym",
+          "seq": 4
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "CREATE",
+          "filename": "CREATE.bru",
+          "seq": 1,
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0
+          },
+          "tags": [],
+          "request": {
+            "url": "{{BASE_URL}}/{{RESOURCE}}",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer {{session_token}}",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Sessions",
+      "filename": "Sessions",
+      "seq": 3,
+      "root": {
+        "request": {
+          "auth": {
+            "mode": "inherit"
+          },
+          "vars": {
+            "req": [
+              {
+                "name": "RESOURCE",
+                "value": "sessions",
+                "enabled": true,
+                "local": false,
+                "uid": "BK5jKUJLpypSlK6WLIQ9e"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Sessions",
+          "seq": 3
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "POST",
+          "filename": "POST.bru",
+          "seq": 1,
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0
+          },
+          "tags": [],
+          "request": {
+            "url": "{{BASE_URL}}/{{RESOURCE}}",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"email\": \"giovanna@mail.com\",\n  \"password\": \"123456\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {
+              "res": [
+                {
+                  "name": "session_token",
+                  "value": "res.body.token",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "REFRESH TOKEN",
+          "filename": "REFRESH TOKEN.bru",
+          "seq": 2,
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0
+          },
+          "tags": [],
+          "request": {
+            "url": "{{BASE_URL}}/token/refresh",
+            "method": "PATCH",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"email\": \"mariana@mail.com\",\n  \"password\": \"123456\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Users",
+      "filename": "Users",
+      "seq": 2,
+      "root": {
+        "request": {
+          "auth": {
+            "mode": "inherit"
+          },
+          "vars": {
+            "req": [
+              {
+                "name": "RESOURCE",
+                "value": "users",
+                "enabled": true,
+                "local": false,
+                "uid": "jhEML17c7amW7Fl5mfKBZ"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Users",
+          "seq": 2
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "POST",
+          "filename": "POST.bru",
+          "seq": 1,
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0
+          },
+          "tags": [],
+          "request": {
+            "url": "{{BASE_URL}}/{{RESOURCE}}",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"Giovanna\",\n  \"email\": \"giovanna@mail.com\",\n  \"password\": \"123456\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "activeEnvironmentUid": "ltCsGvwNJ6KKGMQckG5sz",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "BASE_URL",
+          "value": "http://localhost:3333",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "Dev"
+    }
+  ],
+  "brunoConfig": {
+    "version": "1",
+    "name": "API Checkin",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.0016145706176757812,
+    "filesCount": 10
+  }
+}
